@@ -1,0 +1,15 @@
+[Unit]
+Description=raspiCamSrv
+After=network.target
+
+[Service]
+ExecStart=python3 /home/tpuser/Programme/main.py
+Environment="PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+WorkingDirectory=/home/tpuser/Programme
+StandardOutput=inherit
+StandardError=inherit
+Restart=always
+User=tpuser
+
+[Install]
+WantedBy=multi-user.target

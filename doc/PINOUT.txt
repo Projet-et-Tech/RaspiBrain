@@ -1,0 +1,2 @@
+Le SPI1 est enable sur les broches : 18, 19, 20, 21
+Les Pins d'interruptions sont sur les broches : 17, 24, 25, 7, 16

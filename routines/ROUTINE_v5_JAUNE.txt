@@ -1,0 +1,214 @@
+///////////////////////////////////
+// INITIALISATION
+///////////////////////////////////
+
+LIDAR ON
+ATTENTE_ACK TIRETTE
+
+// Reset de la carte moteur
+RESET_CM
+ATTENTE_ACK MOTEUR
+DELAI 0.2
+
+// On remet l'ascenseur et les pinces en position initiale
+ACTIONNEUR ASCENSEUR TOUS INITIALISATION
+ATTENTE_ACK ACTIONNEUR
+DELAI 0.2
+
+// Incline les pinces magnétiques
+ACTIONNEUR PETITE_PINCE DYNAMIXEL FERMER
+ATTENTE_ACK ACTIONNEUR
+DELAI 0.2
+
+// On remet la fourche en position initiale
+ACTIONNEUR FOURCHE DYNAMIXEL FERMER
+ATTENTE_ACK ACTIONNEUR
+DELAI 0.2
+
+// Set position
+SETPOS -250 -1250 0
+ATTENTE_ACK MOTEUR
+DELAI 0.2
+
+///////////////////////////////////
+// BANNIERE
+///////////////////////////////////
+
+// Déploiement bannnière
+ACTIONNEUR BANIERE SERVOMOTEUR BOUGER 0 90
+ATTENTE_ACK ACTIONNEUR
+DELAI 0.2
+
+DEPLACEMENT -450 -1250 0
+ATTENTE_ACK MOTEUR
+DELAI 0.2
+
+ACTIONNEUR BANIERE SERVOMOTEUR BOUGER 0 0
+ATTENTE_ACK ACTIONNEUR
+DELAI 0.2
+
+// On recule dans la bannière
+DEPLACEMENT -250 -1250 0
+ATTENTE_ACK MOTEUR
+DELAI 0.2
+
+///////////////////////////////////
+// POUSSE ETAGE ZONE 1
+///////////////////////////////////
+
+// avant et 90° -> gauche -> arrière
+DEPLACEMENT -600 -1250 -90
+ATTENTE_ACK MOTEUR
+DELAI 0.2
+
+DEPLACEMENT -600 -1630 -90
+ATTENTE_ACK MOTEUR
+DELAI 0.2
+
+// fourche bas
+//ACTIONNEUR FOURCHE DYNAMIXEL BOUGER 1 200
+//ATTENTE_ACK ACTIONNEUR
+//DELAI 0.2
+
+DEPLACEMENT -310 -1630 -90
+ATTENTE_ACK MOTEUR
+DELAI 0.2
+
+///////////////////////////////////
+// PRISE CANETTES & PLANCHES
+///////////////////////////////////
+
+// Avant et 180°
+DEPLACEMENT -460 -1630 -90
+ATTENTE_ACK MOTEUR
+DELAI 0.2
+
+DEPLACEMENT -460 -1630 0
+ATTENTE_ACK MOTEUR
+DELAI 0.2
+
+// On remonte la fourche
+ACTIONNEUR FOURCHE DYNAMIXEL FERMER
+ATTENTE_ACK ACTIONNEUR
+DELAI 0.2
+
+// On descend les pinces à la bonne hauteur
+ACTIONNEUR ASCENSEUR STEPPER BOUGER 0 0
+ATTENTE_ACK ACTIONNEUR
+DELAI 0.2
+
+// On ferme un peu les pinces
+ACTIONNEUR ASCENSEUR DYNAMIXEL OUVRIR
+ATTENTE_ACK ACTIONNEUR
+DELAI 0.2
+
+// gauche jusqu'au ressources
+DEPLACEMENT -450 -2200 0
+ATTENTE_ACK MOTEUR
+DELAI 0.2
+
+// On ferme complètement les pinces
+ACTIONNEUR ASCENSEUR DYNAMIXEL FERMER
+ATTENTE_ACK ACTIONNEUR
+DELAI 0.2
+
+// on lève légérement les pinces
+ACTIONNEUR ASCENSEUR STEPPER BOUGER 0 30
+ATTENTE_ACK ACTIONNEUR
+DELAI 0.2
+
+///////////////////////////////////
+// DEPOSE PLANCHES & CANS ZONE 2
+///////////////////////////////////
+
+// On va à droite pour s'aligner avec la zone de départ
+//DEPLACEMENT -500 -1250 0
+//ATTENTE_ACK MOTEUR
+//DELAI 0.2
+
+// On s'oriente correctement
+//DEPLACEMENT -500 -1250 90
+//ATTENTE_ACK MOTEUR
+//DELAI 0.2
+
+// On descend les pinces
+//ACTIONNEUR ASCENSEUR STEPPER BOUGER 0 0
+//ATTENTE_ACK ACTIONNEUR
+//DELAI 0.2
+
+// On ouvre lègèrement les pinces
+//ACTIONNEUR ASCENSEUR DYNAMIXEL OUVRIR
+//ATTENTE_ACK ACTIONNEUR
+//DELAI 0.2
+
+///////////////////////////////////
+// CREATION ETAGE N°2
+///////////////////////////////////
+
+// On va à droite pour s'aligner avec le 1er étage
+DEPLACEMENT -590 -1680 0
+ATTENTE_ACK MOTEUR
+DELAI 0.2
+
+// On s'oriente correctement
+DEPLACEMENT -590 -1680 90
+ATTENTE_ACK MOTEUR
+DELAI 0.2
+
+// On s'avance un peu
+DEPLACEMENT -440 -1680 90
+ATTENTE_ACK MOTEUR
+DELAI 0.2
+
+// On monte encore plus les pinces
+ACTIONNEUR ASCENSEUR STEPPER BOUGER 0 160
+ATTENTE_ACK ACTIONNEUR
+DELAI 0.2
+
+// On s'avance au-dessus du 1er étage
+DEPLACEMENT -310 -1680 90
+ATTENTE_ACK MOTEUR
+DELAI 0.2
+
+// On redescend lègèrement les pinces
+ACTIONNEUR ASCENSEUR STEPPER BOUGER 0 150
+ATTENTE_ACK ACTIONNEUR
+DELAI 0.2
+
+// On ouvre les pinces
+ACTIONNEUR ASCENSEUR DYNAMIXEL OUVRIR
+ATTENTE_ACK ACTIONNEUR
+DELAI 0.2
+
+// On redescend lègèrement les pinces
+ACTIONNEUR ASCENSEUR STEPPER BOUGER 0 130
+ATTENTE_ACK ACTIONNEUR
+DELAI 0.2
+
+// On recule correctement
+DEPLACEMENT -600 -1680 90
+ATTENTE_ACK MOTEUR
+DELAI 0.2
+
+///////////////////////////////////
+// RETOUR A LA MAISON
+///////////////////////////////////
+
+// On avance
+DEPLACEMENT -600 -1680 0
+ATTENTE_ACK MOTEUR
+DELAI 0.2
+
+// Gauche
+DEPLACEMENT -600 -1900 0
+ATTENTE_ACK MOTEUR
+DELAI 0.2
+
+// Wait for end
+WAITFOREND
+
+// On va recharger
+DEPLACEMENT -1750 -1900 0
+ATTENTE_ACK MOTEUR
+
+ATTENTE_ACK TIRETTE

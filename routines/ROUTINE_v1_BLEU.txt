@@ -1,0 +1,51 @@
+///////////////////////////////////
+// INITIALISATION
+///////////////////////////////////
+
+LIDAR ON
+ATTENTE_ACK TIRETTE
+
+// Reset de la carte moteur
+RESET_CM
+ATTENTE_ACK MOTEUR
+
+// Set position
+SETPOS -250 1250 0
+ATTENTE_ACK MOTEUR
+
+///////////////////////////////////
+// BANNIERE
+///////////////////////////////////
+
+// Déploiement bannnière
+ACTIONNEUR BANIERE SERVOMOTEUR BOUGER 0 90
+ATTENTE_ACK ACTIONNEUR
+DEPLACEMENT -450 1250 0
+ATTENTE_ACK MOTEUR
+ACTIONNEUR BANIERE SERVOMOTEUR BOUGER 0 0
+ATTENTE_ACK ACTIONNEUR
+
+// On recule dans la bannière
+DEPLACEMENT -250 1250 0
+ATTENTE_ACK MOTEUR
+
+///////////////////////////////////
+// RETOUR A LA MAISON
+///////////////////////////////////
+
+// On avance
+DEPLACEMENT -600 1250 0
+ATTENTE_ACK MOTEUR
+
+// Gauche
+DEPLACEMENT -600 2150 0
+ATTENTE_ACK MOTEUR
+
+// Wait for end
+WAITFOREND
+
+// On va recharger
+DEPLACEMENT -1800 2150 0
+ATTENTE_ACK MOTEUR
+
+ATTENTE_ACK TIRETTE

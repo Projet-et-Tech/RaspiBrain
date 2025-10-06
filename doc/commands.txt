@@ -1,0 +1,4 @@
+sudo journalctl -e
+sudo systemctl stop brain_raspi
+sudo systemctl start brain_raspi
+sudo systemctl enable brain_raspi
