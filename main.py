@@ -6,11 +6,14 @@ import RPi.GPIO as GPIO
 
 # PIPOU
 
-import logger
 from UART import init_uart, envoie_deplacement, envoie_actionneur
 from lib_lidar import LIDAR_mesurement
 import Routine
 from settings import DISTANCE_LIDAR_TEST
+
+from logger_manager import LoggerManager
+
+logger = LoggerManager("main").get_logger()
 
 
 #################################################

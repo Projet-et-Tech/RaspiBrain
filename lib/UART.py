@@ -2,8 +2,9 @@ import time
 import serial
 import struct
 
-import logger
+from logger_manager import LoggerManager
 
+logger = LoggerManager("main").get_logger()
 
 def init_uart(port, baudrate, timeout, debug=0):
     try:

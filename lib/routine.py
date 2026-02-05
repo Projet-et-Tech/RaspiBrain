@@ -2,9 +2,11 @@ import re
 import time
 import traceback
 
-from UART import *
-import logger
+from UART import envoie_deplacement
 
+from logger_manager import LoggerManager
+
+logger = LoggerManager("main").get_logger()
 
 ################################
 # GLOBAL VARIABLES

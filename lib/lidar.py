@@ -258,9 +258,13 @@ from math import floor
 import serial
 import Routine
 import UART
-import logger
+
 from adafruit_rplidar import RPLidar
 from settings import NB_SCAN_SAFE, MIN_DISTANCE
+
+from logger_manager import LoggerManager
+
+logger = LoggerManager("main").get_logger()
 
 
 def LIDAR_mesurement(ser, min_dist=MIN_DISTANCE):
