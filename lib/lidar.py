@@ -259,7 +259,7 @@ import serial
 
 from lib.adafruit_rplidar import RPLidar
 from lib.settings import NB_SCAN_SAFE, MIN_DISTANCE
-import lib.outine
+import lib.routine
 import lib.UART
 
 from lib.logger_manager import LoggerManager
