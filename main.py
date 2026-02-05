@@ -121,7 +121,7 @@ def run_routine(serial_m, serial_a, debug=1):
         while not stop_event.is_set():
             # Votre routine principale
             logger.info("Exécution de la routine ...")
-            Routine.routine(toutes_commandes, serial_m, serial_a, True)
+            routine.routine(toutes_commandes, serial_m, serial_a, True)
             time.sleep(0.1)  # Délai entre les commandes
 
     except Exception as e:
