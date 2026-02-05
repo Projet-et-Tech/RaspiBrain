@@ -2,7 +2,7 @@ import time
 import serial
 import struct
 
-from base_logger import logger
+import logger
 
 
 def init_uart(port, baudrate, timeout, debug=0):

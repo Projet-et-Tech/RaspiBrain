@@ -97,3 +97,5 @@ class LoggerManager:
             str: Log file title/name.
         """
         return self.title
+
+logger = LoggerManager("main").get_logger()
