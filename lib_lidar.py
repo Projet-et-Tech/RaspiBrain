@@ -258,7 +258,7 @@ from math import floor
 import serial
 import Routine
 import UART
-from base_logger import logger
+import logger
 from adafruit_rplidar import RPLidar
 from settings import NB_SCAN_SAFE, MIN_DISTANCE
 

@@ -3,7 +3,7 @@ import time
 import traceback
 
 from UART import *
-from base_logger import logger
+import logger
 
 
 ################################
@@ -415,7 +415,7 @@ def routine(toutes_commandes, serial1, serial2, debug=False):
                     if debug:
                         logger.debug("Déplacement détecté")
 
-                    envoie_Deplacement(serial1, cmd['x'], cmd['y'], cmd['theta'])  # timeout=0
+                    envoie_deplacement(serial1, cmd['x'], cmd['y'], cmd['theta'])  # timeout=0
                     logger.info("DEPLACEMENT")
 
                 elif cmd['type'] == "ACTIONNEUR":
@@ -429,21 +429,21 @@ def routine(toutes_commandes, serial1, serial2, debug=False):
                     if debug:
                         logger.debug("Déplacement vitesse détecté")
 
-                    envoie_Deplacement(serial1, cmd['x'], cmd['y'], cmd['theta'], cmd["speed"])  # timeout=0
+                    envoie_deplacement(serial1, cmd['x'], cmd['y'], cmd['theta'], cmd["speed"])  # timeout=0
                     logger.info("DEPLACEMENT_VITESSE")
 
                 elif cmd['type'] == "DEPLACEMENT_RELATIF":
                     if debug:
                         logger.debug("Déplacement relatif détecté")
 
-                    envoie_Deplacement(serial1, cmd['x'], cmd['y'], cmd['theta'], 0, False)  # timeout=0
+                    envoie_deplacement(serial1, cmd['x'], cmd['y'], cmd['theta'], 0, False)  # timeout=0
                     logger.info("DEPLACEMENT_RELATIF")
 
                 elif cmd['type'] == "SETPOS":
                     if debug:
                         logger.debug("Mise à jour de la position détecté")
 
-                    envoie_Deplacement(serial1, cmd['x'], cmd['y'], cmd['theta'], set_position=True)  # timeout=0
+                    envoie_deplacement(serial1, cmd['x'], cmd['y'], cmd['theta'], set_position=True)  # timeout=0
                     logger.info("SETPOS")
 
                 elif cmd['type'] == "ATTENTE_ACK":
