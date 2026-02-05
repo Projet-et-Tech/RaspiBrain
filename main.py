@@ -167,11 +167,11 @@ if __name__ == "__main__":
         )
 
         # Lancement des threads
-        lidar_thread.start()
-        routine_thread.start()
+        thread_lidar.start()
+        thread_routine.start()
 
-        lidar_thread.join()
-        routine_thread.join()
+        thread_lidar.join()
+        thread_routine.join()
 
     except KeyboardInterrupt:
         logger.warning("Arrêt demandé par l'utilisateur")
