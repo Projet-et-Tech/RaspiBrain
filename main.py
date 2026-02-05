@@ -6,7 +6,7 @@ import RPi.GPIO as GPIO
 
 # PIPOU
 
-from base_logger import logger
+from logger import LoggerManager
 from UART import init_uart, envoie_deplacement, envoie_actionneur
 from lib_lidar import LIDAR_mesurement
 import Routine
@@ -134,6 +134,9 @@ def run_routine(serial_m, serial_a, debug=1):
 ###########################################################
 
 if __name__ == "__main__":
+
+    logger = LoggerManager("main").get_logger()
+
     if len(sys.argv) > 1:
         if sys.argv[1] == '--test':
             logger.fatal("PROGRAMME DE TEST")
