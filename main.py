@@ -97,7 +97,7 @@ def run_routine(serial_m, serial_a, debug=1):
 
         # 1. Lecture du fichier de routine
         logger.fatal(f"{ROUTINE_FILE}")
-        toutes_commandes = Routine.analyser_routine_complete("routines/" + ROUTINE_FILE)
+        toutes_commandes = routine.analyser_routine_complete("routines/" + ROUTINE_FILE)
         if debug:
             logger.debug(f"{len(toutes_commandes)} commandes chargées")
 
