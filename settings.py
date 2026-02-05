@@ -2,4 +2,4 @@
 MIN_DISTANCE = 370  # distance minimale en mm
 NB_SCAN_SAFE = 1
 
-DITANCE_LIDAR_TEST = 350
+DISTANCE_LIDAR_TEST = 350

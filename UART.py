@@ -1,11 +1,11 @@
+import time
 import serial
 import struct
-import time
 
 from base_logger import logger
 
 
-def Initialiser_UART(port, baudrate, timeout, debug=0):
+def init_uart(port, baudrate, timeout, debug=0):
     try:
         # Initialisation de la connexion série
         ser = serial.Serial(port, baudrate=baudrate, timeout=timeout)
@@ -23,8 +23,7 @@ def Initialiser_UART(port, baudrate, timeout, debug=0):
         logger.error(f"Erreur d'initialisation de {port}: {e}")
         return None
 
-def envoie_STOP(ser,debug=0):
-
+def envoie_stop(ser, debug=0):
 	# Vérifier que la connexion série est bien ouverte
     if not ser.is_open:
         logger.error("La connexion série n'est pas ouverte.")
@@ -47,8 +46,7 @@ def envoie_STOP(ser,debug=0):
         logger.debug("Message envoyé avec succès.")
 
 
-def envoie_RESET_CM(ser, debug=0):
-
+def envoie_reset_cm(ser, debug=0):
 	# Vérifier que la connexion série est bien ouverte
     if not ser.is_open:
         logger.error("La connexion série n'est pas ouverte.")
@@ -71,7 +69,7 @@ def envoie_RESET_CM(ser, debug=0):
     if debug:
         logger.debug("Message envoyé avec succès.")
 
-def envoie_RESUME_CM(ser, debug=0):
+def envoie_resume_cm(ser, debug=0):
 
 	# Vérifier que la connexion série est bien ouverte
     if not ser.is_open:
@@ -96,16 +94,7 @@ def envoie_RESUME_CM(ser, debug=0):
         logger.debug("Message envoyé avec succès.")
 
 
-
-def envoie_RESET_CA(ser, debug=0):
-	pass
-
-
-def envoie_READ_POS(ser, debug=0):
-	pass
-
-
-def envoie_Deplacement(ser, x, y, theta, speed=0, relative=False, set_position=False, debug=0):
+def envoie_deplacement(ser, x, y, theta, speed=0, relative=False, set_position=False, debug=0):
     # Vérifier que la connexion série est bien ouverte
     if not ser.is_open:
         logger.error("La connexion série n'est pas ouverte.")
@@ -145,7 +134,6 @@ def envoie_Deplacement(ser, x, y, theta, speed=0, relative=False, set_position=F
         logger.error(f"Erreur lors de la conversion des données : {e}")
         return
 
-
     if speed == 0:
         message = command + x_bytes + y_bytes + theta_bytes + b'\r'
     else:
@@ -153,7 +141,6 @@ def envoie_Deplacement(ser, x, y, theta, speed=0, relative=False, set_position=F
 
     if debug:
         logger.debug(f"Deplacement envoyé : {message.hex()}")
-
 
     try:
         ser.write(message)
@@ -168,7 +155,7 @@ def envoie_Deplacement(ser, x, y, theta, speed=0, relative=False, set_position=F
         logger.debug("Message envoyé avec succès.")
 
 
-def envoie_actionneur(ser, module, type_actionneur, action, position=0,speed = 0, debug=1):
+def envoie_actionneur(ser, module, type_actionneur, action, position=0, speed = 0, debug=1):
     """
     Envoie une commande à un actionneur via UART
 

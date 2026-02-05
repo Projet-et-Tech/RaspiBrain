@@ -269,7 +269,6 @@ def LIDAR_mesurement(ser, min_dist=MIN_DISTANCE):
     lidar = RPLidar(None, PORT_NAME, timeout=3)
 
     try:
-
         not_detect_counter = 0
         time_detected = 0
 

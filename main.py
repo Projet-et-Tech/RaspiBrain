@@ -1,18 +1,16 @@
+import sys
+import time
 import threading
 import queue
-import time
-import signal
 import RPi.GPIO as GPIO
-import multiprocessing
-import sys
 
-#pipou
+# PIPOU
 
 from base_logger import logger
-from UART import envoie_Deplacement,envoie_actionneur, Initialiser_UART
+from UART import init_uart, envoie_deplacement, envoie_actionneur
 from lib_lidar import LIDAR_mesurement
-import Routine  # Import du ficher Routine.py
-from settings import DITANCE_LIDAR_TEST
+import Routine
+from settings import DISTANCE_LIDAR_TEST
 
 
 #################################################
@@ -34,15 +32,15 @@ stop_event = threading.Event()
 # FONCTIONS
 #################################################
 
-def LIDAR(serialM):
+def run_lidar(serial_m):
     while not stop_event.is_set():
         try:
             # Récupération des données LIDAR
             if len(sys.argv) > 1:
                 if sys.argv[1] == '--test':
-                    LIDAR_mesurement(serialM, DITANCE_LIDAR_TEST)
+                    LIDAR_mesurement(serial_m, DITANCE_LIDAR_TEST)
             else:
-                LIDAR_mesurement(serialM)
+                LIDAR_mesurement(serial_m)
             # Wait before restarting
             time.sleep(0.1)
         except Exception as e:
@@ -62,8 +60,8 @@ def tirette_callback(channel):
 	logger.debug("Interruption Tirette reçu")
 
 
-def Routine_global(serialM,serialA,debug=1):
-    #Initialisation des pin en Interruption METTRE PULL DOWN SINON CA CRASH
+def run_routine(serial_m, serial_a, debug=1):
+    # Initialisation des pin en Interruption METTRE PULL DOWN SINON CA CRASH
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(IRQPIN_ACTIONNEUR, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
     GPIO.setup(IRQPIN_MOTEUR, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
@@ -100,27 +98,27 @@ def Routine_global(serialM,serialA,debug=1):
         if debug:
             logger.debug(f"{len(toutes_commandes)} commandes chargées")
 
-        """
-        if len(sys.argv) == 1:
-            is_ack = False
-            for cmd in toutes_commandes:
-                if "ATTENTE_ACK TIRETTE" in cmd['raw']:
-                    is_ack = True
-                    break
+        
+        # # # if len(sys.argv) == 1:
+        # # #     is_ack = False
+        # # #     for cmd in toutes_commandes:
+        # # #         if "ATTENTE_ACK TIRETTE" in cmd['raw']:
+        # # #             is_ack = True
+        # # #             break
 
-            if is_ack == False:
-                toutes_commandes.insert(0,
-                    {
-                        'type': "ATTENTE_ACK",
-                        'attente_ack': "TIRETTE"
-                    }
-                )
-        """
+        # # #     if is_ack == False:
+        # # #         toutes_commandes.insert(0,
+        # # #             {
+        # # #                 'type': "ATTENTE_ACK",
+        # # #                 'attente_ack': "TIRETTE"
+        # # #             }
+        # # #         )
+        
 
         while not stop_event.is_set():
             # Votre routine principale
             logger.info("Exécution de la routine ...")
-            Routine.routine(toutes_commandes, serialM, serialA, True)
+            Routine.routine(toutes_commandes, serial_m, serial_a, True)
             time.sleep(0.1)  # Délai entre les commandes
 
     except Exception as e:
@@ -147,14 +145,23 @@ if __name__ == "__main__":
         logger.debug("Initialisation des interfaces UART")
 
         # UART1 utiliser pour le moteur
-        serial_moteur = Initialiser_UART('/dev/ttyAMA5', 115200, 1, Routine.DEBUG)
-        serial_actionneur = Initialiser_UART('/dev/serial0', 115200, 1, Routine.DEBUG)
+        serial_moteur = init_uart('/dev/ttyAMA5', 115200, 1, Routine.DEBUG)
+        serial_actionneur = init_uart('/dev/serial0', 115200, 1, Routine.DEBUG)
 
         logger.debug("Creation and strating of Threads")
 
         # Création des threads
-        lidar_thread = threading.Thread(target=lambda: LIDAR(serial_moteur), daemon=True)
-        routine_thread = threading.Thread(target=lambda: Routine_global(serial_moteur, serial_actionneur, debug=Routine.DEBUG), daemon=True)
+        thread_lidar = threading.Thread(
+            target=run_lidar,
+            args=[serial_moteur],
+            daemon=True
+        )
+
+        thread_routine = threading.Thread(
+            target=run_routine,
+            args=[serial_moteur, serial_actionneur, Routine.DEBUG],
+            daemon=True
+        )
 
         # Lancement des threads
         lidar_thread.start()
