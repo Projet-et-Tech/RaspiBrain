@@ -256,11 +256,11 @@ import numpy as np
 from math import floor
 
 import serial
-import Routine
-import UART
 
 from lib.adafruit_rplidar import RPLidar
 from lib.settings import NB_SCAN_SAFE, MIN_DISTANCE
+import lib.outine
+import lib.UART
 
 from lib.logger_manager import LoggerManager
 
