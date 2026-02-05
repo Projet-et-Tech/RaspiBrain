@@ -6,9 +6,9 @@ import RPi.GPIO as GPIO
 
 # PIPOU
 
+import lib.routine as routine
 from lib.UART import init_uart, envoie_deplacement, envoie_actionneur
 from lib.lidar import LIDAR_mesurement
-import lib.routine
 from lib.settings import DISTANCE_LIDAR_TEST
 
 from lib.logger_manager import LoggerManager
