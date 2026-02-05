@@ -148,8 +148,8 @@ if __name__ == "__main__":
         logger.debug("Initialisation des interfaces UART")
 
         # UART1 utiliser pour le moteur
-        serial_moteur = init_uart('/dev/ttyAMA5', 115200, 1, Routine.DEBUG)
-        serial_actionneur = init_uart('/dev/serial0', 115200, 1, Routine.DEBUG)
+        serial_moteur = init_uart('/dev/ttyAMA5', 115200, 1, routine.DEBUG)
+        serial_actionneur = init_uart('/dev/serial0', 115200, 1, routine.DEBUG)
 
         logger.debug("Creation and strating of Threads")
 
@@ -162,7 +162,7 @@ if __name__ == "__main__":
 
         thread_routine = threading.Thread(
             target=run_routine,
-            args=[serial_moteur, serial_actionneur, Routine.DEBUG],
+            args=[serial_moteur, serial_actionneur, routine.DEBUG],
             daemon=True
         )
 
