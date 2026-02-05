@@ -51,15 +51,15 @@ def run_lidar(serial_m):
             break
 
 def actionneur_callback(channel):
-	Routine.flag_ACK = 2
+	routine.flag_ACK = 2
 	logger.debug("Interruption Actionneur reçu")
 
 def moteur_callback(channel):
-	Routine.flag_ACK = 1
+	routine.flag_ACK = 1
 	logger.debug("Interruption Moteur reçu")
 
 def tirette_callback(channel):
-	Routine.flag_ACK = 3
+	routine.flag_ACK = 3
 	logger.debug("Interruption Tirette reçu")
 
 
