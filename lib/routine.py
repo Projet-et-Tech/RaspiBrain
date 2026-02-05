@@ -2,9 +2,9 @@ import re
 import time
 import traceback
 
-from UART import envoie_deplacement
+from lib.UART import envoie_deplacement
 
-from logger_manager import LoggerManager
+from lib.logger_manager import LoggerManager
 
 logger = LoggerManager("main").get_logger()
 

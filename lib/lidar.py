@@ -259,10 +259,10 @@ import serial
 import Routine
 import UART
 
-from adafruit_rplidar import RPLidar
-from settings import NB_SCAN_SAFE, MIN_DISTANCE
+from lib.adafruit_rplidar import RPLidar
+from lib.settings import NB_SCAN_SAFE, MIN_DISTANCE
 
-from logger_manager import LoggerManager
+from lib.logger_manager import LoggerManager
 
 logger = LoggerManager("main").get_logger()
 
