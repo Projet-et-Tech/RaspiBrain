@@ -269,10 +269,10 @@ logger = LoggerManager("main").get_logger()
 
 def LIDAR_mesurement(ser, min_dist=MIN_DISTANCE):
     # Setup the RPLidar
-    PORT_NAME = "/dev/ttyUSB0"
-    lidar = RPLidar(None, PORT_NAME, timeout=3)
-
     try:
+        PORT_NAME = "/dev/ttyUSB0"
+        lidar = RPLidar(None, PORT_NAME, timeout=3)
+
         not_detect_counter = 0
         time_detected = 0
 
